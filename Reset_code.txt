@@ -1,0 +1,44 @@
+trading_number=0;
+	trading.Store(tradings);
+	
+	operation_number=0;
+	operation.Store(operations);
+	
+	ofstream WRITE("User_data.txt");
+	customer_number=1;
+	WRITE.write((char*)(&customer_number),sizeof(int));
+	char an[50]="Liu HQ",bn[50]="111678";
+	customers[0].if_administrator=1,strcpy(customers[0].customer_name,an),strcpy(customers[0].customer_code,bn),customers[0].assets=100000000,customers[0].cash=100000000,customers[0].market_value=0;
+	WRITE.write((char*)(&customers[0]),sizeof(customers[0]));
+	WRITE.close();
+	
+	ifstream READ("User_data.txt");
+	READ.read((char*)(&customer_number),sizeof(int));
+	printf("%d\n",customer_number);
+	for(register int i=0;i<customer_number;i++){
+		READ.read((char*)(&customers[i]),sizeof(customers[i]));
+		printf("%s %s\n",customers[i].customer_name,customers[i].customer_code);
+		for(register int j=0;j<MAXN;j++)
+			printf("%lld %s %s\n",customers[i].stocks_number[j],customers[i].stocks_name[j],customers[i].stocks_code[j]);
+		customers[i].Customer_information();
+	}
+	READ.close();
+	
+	
+	stocks[0].issue_price=827389.17,stocks[0].listing_price=458911.89,stocks[0].shares_total=1829399,stocks[0].shares_floatable=1829399;
+	stocks[1].issue_price=399845.89,stocks[1].listing_price=419283.56,stocks[1].shares_total=3748891,stocks[1].shares_floatable=3748891;
+	stocks[2].issue_price=782993.29,stocks[2].listing_price=681003.15,stocks[2].shares_total=2892839,stocks[2].shares_floatable=2892839;
+	stocks[3].issue_price=630028.11,stocks[3].listing_price=702384.90,stocks[3].shares_total=4729300,stocks[3].shares_floatable=4729300;
+	stocks[4].issue_price=572901.25,stocks[4].listing_price=728398.09,stocks[4].shares_total=2918784,stocks[4].shares_floatable=2918784;
+	char a1[50]="Apple",a2[50]="018";strcpy(stocks[0].stock_name,a1);strcpy(stocks[0].stock_code,a2);
+	char b1[50]="HUAWEI",b2[50]="078";strcpy(stocks[1].stock_name,b1);strcpy(stocks[1].stock_code,b2);
+	char c1[50]="SUMSUNG",c2[50]="049";strcpy(stocks[2].stock_name,c1);strcpy(stocks[2].stock_code,c2);
+	char d1[50]="ZTE",d2[50]="024";strcpy(stocks[3].stock_name,d1);strcpy(stocks[3].stock_code,d2);
+	char e1[50]="Honor",e2[50]="079";strcpy(stocks[4].stock_name,e1);strcpy(stocks[4].stock_code,e2);
+	fstream output;
+	output.open("Stock_data.txt");
+	if(!output) cout<<"打开文件错误！"<<endl;
+	else{
+		for(int i=0;i<5;i++) output.write((char*)&stocks[i],sizeof(Stock));
+		output.close();
+	}system("pause");
